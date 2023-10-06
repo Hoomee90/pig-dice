@@ -43,6 +43,18 @@ pigDice.roll();
 console.log(pigDice.turnScore);
 Expected Output: 2;
 
+Test: "It should add a random number between 1 - 6 to the turn score"
+Code:
+pigDice.roll();
+console.log(pigDice.turnScore);
+Expected Output: 5;
+
+Test: "It should end the turn if it rolls a 1"
+Code:
+pigDice.roll();
+console.log(pigDice.activePlayer);
+Expected Output: 1;
+
 Describe: hold()
 
 Test: "It should add the turn score to the current player's score"

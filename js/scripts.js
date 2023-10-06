@@ -1,3 +1,4 @@
+//Business Logic
 class PigDice {
   constructor() {
     this.activePlayer = 0;
@@ -5,7 +6,7 @@ class PigDice {
     this.turnScore = 0;
   }
   roll() {
-    let currentRoll = 2;
+    let currentRoll = Math.floor(Math.random() * 6 + 1);
     if (currentRoll === 1) {
       this.endTurn();
     } else {
