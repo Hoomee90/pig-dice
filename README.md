@@ -33,7 +33,7 @@ Copyright (c) 2023 Samantha Callie
 
 ## Pseudocode Tests Used During Development
 
-let pigDice = new PigDice();
+let pigDice = new PigDice(2);
 
 Describe: roll()
 
@@ -41,23 +41,30 @@ Test: "It should add 2 to the turn score"
 Code:
 pigDice.roll();
 console.log(pigDice.turnScore);
-Expected Output: 2;
+Expected Output: 2
 
 Test: "It should add a random number between 1 - 6 to the turn score"
 Code:
 pigDice.roll();
 console.log(pigDice.turnScore);
-Expected Output: 5;
+Expected Output: 5
 
 Test: "It should end the turn if it rolls a 1"
 Code:
 pigDice.roll();
 console.log(pigDice.activePlayer);
-Expected Output: 1;
+Expected Output: 1
 
 Describe: hold()
 
 Test: "It should add the turn score to the current player's score"
+Code:
+pigDice.roll();
+pigDice.hold();
+console.log(pigDice.scores[0]);
+Expected Output: 2
+
+Test: "If the current player doesn't have a score, it should create one with a value of the turn score"
 Code:
 pigDice.roll();
 pigDice.hold();
@@ -80,9 +87,15 @@ pigDice.endTurn();
 console.log(pigDice.turnScore);
 Expected Output: 0
 
-Test: "It should change the active player"
+Test: "It should add one to the active player value"
 Code:
-pigDice.roll();
 pigDice.endTurn();
 console.log(pigDice.activePlayer);
 Expected Output: 1
+
+Test: "If everybody has gone it should instead return to the first player"
+Code:
+pigDice.endTurn();
+pigDice.endTurn();
+console.log(pigDice.activePlayer);
+Expected Output: 0
