@@ -3,6 +3,7 @@ class PigDice {
   constructor(playerNum) {
     this.playerNum = playerNum;
     this.activePlayer = 0;
+    this.previousPlayer;
     this.scores = {};
     this.turnScore = 0;
   }
@@ -22,6 +23,7 @@ class PigDice {
   }
   endTurn() {
     this.turnScore = 0;
+    this.previousPlayer = this.activePlayer;
     this.activePlayer = this.activePlayer + 1 === this.playerNum ? 0 : this.activePlayer + 1;
   }
 }
@@ -35,11 +37,20 @@ function generateScores() {
   scoreList.id = "score-list";
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
-    li.id = "score-" + i;
-    li.innerText = "Player " + parseInt(i + 1) + "'s score is 0"
+    let span = document.createElement("span")
+    span.id = `score-${i}`;
+    li.innerText = `Player ${i + 1}'s score is `
+    span.innerText = "0"
+    li.append(span)
     scoreList.append(li);
   }
   document.querySelector(".score-record").after(scoreList);
+}
+
+function updateScores() {
+  let toUpdate = document.querySelector(`#score-${pigDice.previousPlayer}`);
+  toUpdate.innerText = pigDice.scores[pigDice.previousPlayer];
+  console.log(toUpdate);
 }
 
 function handleChoice(event) {
@@ -57,8 +68,8 @@ function handleChoice(event) {
   } else if (event.target.value === "hold-button") {
     ActionResult.innerText = "chose to hold"
     pigDice.hold();
+    updateScores();
   }
-  updateScores();
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
 }
