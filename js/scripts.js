@@ -30,19 +30,25 @@ let pigDice = new PigDice(2);
 
 //UI Logic
 
-function handleTurn(event) {
-  let rollResult = document.querySelector("#roll-result");
+function handleChoice(event) {
+  let ActionResult = document.querySelector(".action-result");
+  document.querySelector(".clicking-player").innerText = pigDice.activePlayer + 1;
   if (event.target.value === "roll-button") {
     const roll = pigDice.roll();
+    ActionResult.parentElement.removeAttribute("hidden");
     if (roll) {
-      rollResult.innerText = roll;
+      ActionResult.innerText = "rolled a " + roll;
     } else if (!roll) {
-      rollResult.innerText = "1 \n Your turn is forfeit!"
+      ActionResult.innerText = "rolled a 1 \n Their turn is forfeit!"
     }
+  } else if (event.target.value === "hold-button") {
+    ActionResult.innerText = "chose to hold"
+    pigDice.hold();
   }
+  document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
 }
 
 window.addEventListener("load", function (){
-  document.querySelector("button[value='roll-button']").addEventListener("click", handleTurn)
+  document.querySelectorAll("button").forEach(el => el.addEventListener("click", handleChoice));
 });
