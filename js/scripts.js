@@ -12,6 +12,7 @@ class PigDice {
       this.endTurn();
     } else {
       this.turnScore += currentRoll;
+      return currentRoll;
     }
   }
   hold() {
@@ -26,3 +27,22 @@ class PigDice {
 }
 
 let pigDice = new PigDice(2);
+
+//UI Logic
+
+function handleTurn(event) {
+  let rollResult = document.querySelector("#roll-result");
+  if (event.target.value === "roll-button") {
+    const roll = pigDice.roll();
+    if (roll) {
+      rollResult.innerText = roll;
+    } else if (!roll) {
+      rollResult.innerText = "1 \n Your turn is forfeit!"
+    }
+  }
+  document.querySelector(".active-total").innerText = pigDice.turnScore;
+}
+
+window.addEventListener("load", function (){
+  document.querySelector("button[value='roll-button']").addEventListener("click", handleTurn)
+});
