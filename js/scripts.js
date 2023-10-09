@@ -43,9 +43,11 @@ function handleGameInit(event) {
 
 function generateScores() {
   let scoreList = document.createElement("ul");
-  scoreList.id = "score-list";
+  const styleArray = ["secondary", "danger", "warning", "success", "primary", "info"];
+  scoreList.classList.add("list-group", "mb-3");
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
+    li.classList.add("list-group-item", `list-group-item-${styleArray[i % 6]}`)
     let span = document.createElement("span");
     span.id = `score-${i}`;
     li.innerText = `Player ${i + 1}'s score is `;
@@ -62,7 +64,7 @@ function updateScores() {
 }
 
 function handleChoice(event) {
-  let ActionResult = document.querySelector(".action-result");
+  const ActionResult = document.querySelector(".action-result");
   document.querySelector(".clicking-player").innerText = pigDice.activePlayer + 1;
   
   if (event.target.value === "roll-button") {
@@ -80,6 +82,7 @@ function handleChoice(event) {
   }
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
+  document.querySelector("#game").className = `card ${document.querySelector(`span#score-${pigDice.activePlayer}`).parentElement.classList[1]}`
 }
 
 window.addEventListener("load", () => {
