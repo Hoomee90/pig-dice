@@ -5,14 +5,22 @@
   <script src="js/scripts.js"></script>
   <title>Pig Dice</title>
 </head>
-<body>
+<body class="container">
   <h1>Pig Dice</h1>
-  <p>It is player <span class="active-player font-weight-bold">1</span>'s turn</p>
-  <p>Their turn total is <span class="active-total font-weight-bold">___</span></p>
-  <p class="score-record">The scores are:</p>
-  <button type="button" value="roll-button">Roll Dice</button>
-  <button type="button" value="hold-button">Hold</button>
-  <p hidden>Player <span class="clicking-player">1</span> <span class="action-result">_</span></p>
+  <form>
+    <div class="form-group">
+      <label for="player-number">How many players?</label>
+      <input type="number" class="form-control col-4" id="player-number" name="player-number">
+    </div>
+    <button type="submit" class="btn btn-secondary">Submit</button>
+  </form>
+  <div id="game" hidden>
+    <p>It is player <span class="active-player font-weight-bold">1</span>'s turn</p>
+    <p>Their turn total is <span class="active-total font-weight-bold">___</span></p>
+    <p class="score-record">The scores are:</p>
+    <button type="button" class="btn btn-secondary" value="roll-button">Roll Dice</button>
+    <button type="button" class="btn btn-secondary" value="hold-button">Hold</button>
+    <p hidden>Player <span class="clicking-player">1</span> <span class="action-result">_</span></p>
+  </div>
 </body>
 </html>
-</head>

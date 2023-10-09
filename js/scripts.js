@@ -17,7 +17,7 @@ class PigDice {
     }
   }
   hold() {
-    let playerScore = this.scores[this.activePlayer]
+    let playerScore = this.scores[this.activePlayer];
     this.scores[this.activePlayer] = playerScore ? playerScore + this.turnScore : this.turnScore;
     this.endTurn();
   }
@@ -28,20 +28,29 @@ class PigDice {
   }
 }
 
-let pigDice = new PigDice(2);
+let pigDice;
 
 //UI Logic
+
+function handleGameInit(event) {
+  event.preventDefault();
+  const input = document.querySelector("#player-number");
+  pigDice = new PigDice(parseInt(input.value));
+  generateScores();
+  document.querySelector("form").toggleAttribute("hidden");
+  document.querySelector("#game").toggleAttribute("hidden");
+}
 
 function generateScores() {
   let scoreList = document.createElement("ul");
   scoreList.id = "score-list";
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
-    let span = document.createElement("span")
+    let span = document.createElement("span");
     span.id = `score-${i}`;
-    li.innerText = `Player ${i + 1}'s score is `
-    span.innerText = "0"
-    li.append(span)
+    li.innerText = `Player ${i + 1}'s score is `;
+    span.innerText = "0";
+    li.append(span);
     scoreList.append(li);
   }
   document.querySelector(".score-record").after(scoreList);
@@ -50,7 +59,6 @@ function generateScores() {
 function updateScores() {
   let toUpdate = document.querySelector(`#score-${pigDice.previousPlayer}`);
   toUpdate.innerText = pigDice.scores[pigDice.previousPlayer];
-  console.log(toUpdate);
 }
 
 function handleChoice(event) {
@@ -63,10 +71,10 @@ function handleChoice(event) {
     if (roll) {
       ActionResult.innerText = "rolled a " + roll;
     } else if (!roll) {
-      ActionResult.innerText = "rolled a 1 \n Their turn is forfeit!"
+      ActionResult.innerText = "rolled a 1 \n Their turn is forfeit!";
     }
   } else if (event.target.value === "hold-button") {
-    ActionResult.innerText = "chose to hold"
+    ActionResult.innerText = "chose to hold";
     pigDice.hold();
     updateScores();
   }
@@ -74,7 +82,7 @@ function handleChoice(event) {
   document.querySelector(".active-total").innerText = pigDice.turnScore;
 }
 
-window.addEventListener("load", function (){
-  generateScores();
-  document.querySelectorAll("button").forEach(el => el.addEventListener("click", handleChoice));
+window.addEventListener("load", () => {
+  document.querySelectorAll("[type=button]").forEach(el => el.addEventListener("click", handleChoice));
+  document.querySelector("form").addEventListener("submit", handleGameInit);
 });
