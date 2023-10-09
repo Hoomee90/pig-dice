@@ -30,9 +30,22 @@ let pigDice = new PigDice(2);
 
 //UI Logic
 
+function generateScores() {
+  let scoreList = document.createElement("ul");
+  scoreList.id = "score-list";
+  for (let i = 0; i < pigDice.playerNum; i++) {
+    let li = document.createElement("li");
+    li.id = "score-" + i;
+    li.innerText = "Player " + parseInt(i + 1) + "'s score is 0"
+    scoreList.append(li);
+  }
+  document.querySelector(".score-record").after(scoreList);
+}
+
 function handleChoice(event) {
   let ActionResult = document.querySelector(".action-result");
   document.querySelector(".clicking-player").innerText = pigDice.activePlayer + 1;
+  
   if (event.target.value === "roll-button") {
     const roll = pigDice.roll();
     ActionResult.parentElement.removeAttribute("hidden");
@@ -45,10 +58,12 @@ function handleChoice(event) {
     ActionResult.innerText = "chose to hold"
     pigDice.hold();
   }
+  updateScores();
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
 }
 
 window.addEventListener("load", function (){
+  generateScores();
   document.querySelectorAll("button").forEach(el => el.addEventListener("click", handleChoice));
 });
