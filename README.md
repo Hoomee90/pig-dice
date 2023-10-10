@@ -4,6 +4,8 @@
 
 #### Play a classic dice game with any number of players
 
+### [See it here](https://hoomee90.github.io/pig-dice/)
+
 ## Technologies Used
 
 * HTML
