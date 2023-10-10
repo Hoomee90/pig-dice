@@ -1,8 +1,8 @@
-# 
+# Pig Dice
 
 #### By **Samantha Callie**
 
-#### 
+#### Play a classic dice game with any number of players
 
 ## Technologies Used
 
@@ -13,7 +13,7 @@
 
 ## Description
 
-
+This site allows users to play Pig Dice. They can enter a number of players, then take turns choosing to roll or hold, winning when they get to 100. For complete rules, see [this Wikipedia page](https://en.wikipedia.org/wiki/Pig_%28dice_game%29)
 
 ## Setup/Installation Requirements
 
