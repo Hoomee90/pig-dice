@@ -3,13 +3,14 @@ class PigDice {
   constructor(playerNum) {
     this.playerNum = playerNum;
     this.activePlayer = 0;
-    this.previousPlayer;
+    this.previousPlayer = 0;
     this.scores = {};
     this.turnScore = 0;
     this.winner = null;
   }
   roll() {
-    let currentRoll = Math.floor(Math.random() * 6 + 1);
+    // let currentRoll = Math.floor(Math.random() * 6 + 1);
+    let currentRoll = 50;
     if (currentRoll === 1) {
       this.endTurn();
     } else {
@@ -20,7 +21,7 @@ class PigDice {
   hold() {
     let playerScore = this.scores[this.activePlayer];
     this.scores[this.activePlayer] = playerScore ? playerScore + this.turnScore : this.turnScore;
-    if (playerScore >= 100) {
+    if (this.scores[this.activePlayer] >= 100) {
       this.winner = this.activePlayer;
     } else {
       this.endTurn();
@@ -87,6 +88,9 @@ function handleChoice(event) {
     ActionResult.innerText = "chose to hold";
     pigDice.hold();
     updateScores();
+  }
+  if (pigDice.winner !== null) {
+    ActionResult.innerText = "won the game!";
   }
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
