@@ -13,7 +13,7 @@
 
 ## Description
 
-This site allows users to play Pig Dice. They can enter a number of players, then take turns choosing to roll or hold, winning when they get to 100. For complete rules, see [this Wikipedia page](https://en.wikipedia.org/wiki/Pig_%28dice_game%29)
+This site allows users to play Pig Dice. They can enter a number of players, then take turns choosing to roll or hold, winning when they get to 100 points. For the complete rules, see [this Wikipedia page](https://en.wikipedia.org/wiki/Pig_%28dice_game%29)
 
 ## Setup/Installation Requirements
 
@@ -23,7 +23,7 @@ This site allows users to play Pig Dice. They can enter a number of players, the
 
 ## Known Bugs
 
-* There are no known bugs at this time
+* Inputting a large number of players may result in slowdowns or crashes
 
 ## License
 

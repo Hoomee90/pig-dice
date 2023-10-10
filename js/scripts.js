@@ -57,7 +57,7 @@ function generateScores() {
   scoreList.classList.add("score-list", "list-group", "mb-3");
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
-    li.classList.add("list-group-item", "border-0",`list-group-item-${styleArray[i % 5]}`)
+    li.classList.add("list-group-item", "border-0",`list-group-item-${styleArray[i % 5]}`);
     let span = document.createElement("span");
     span.id = `score-${i}`;
     li.innerText = `Player ${i + 1}'s score is `;
@@ -102,7 +102,7 @@ function handleChoice(event) {
   }
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
-  document.querySelector("#game").className = `card ${document.querySelector(`span#score-${pigDice.activePlayer}`).parentElement.classList[2]}`
+  document.querySelector("#game").className = `card ${document.querySelector(`span#score-${pigDice.activePlayer}`).parentElement.classList[2]}`;
 }
 
 window.addEventListener("load", () => {
