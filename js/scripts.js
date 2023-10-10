@@ -9,8 +9,7 @@ class PigDice {
     this.winner = null;
   }
   roll() {
-    // let currentRoll = Math.floor(Math.random() * 6 + 1);
-    let currentRoll = 50;
+    let currentRoll = Math.floor(Math.random() * 6 + 1);
     if (currentRoll === 1) {
       this.endTurn();
     } else {
@@ -43,12 +42,12 @@ let pigDice;
 
 function handleGameInit(event) {
   event.preventDefault();
-  const input = document.querySelector("#player-number");
   if (event.type === "submit") {
-    pigDice = new PigDice(parseInt(input.value));
+    pigDice = new PigDice(parseInt(document.querySelector("#player-number").value));
   }
   generateScores();
   document.querySelector("form").classList.add("d-none");
+  document.querySelector(".card-footer").classList.add("d-none");
   document.querySelector("#game").classList.remove("d-none");
 }
 
@@ -80,7 +79,7 @@ function handleChoice(event) {
   
   if (event.target.value === "roll-button") {
     const roll = pigDice.roll();
-    ActionResult.parentElement.removeAttribute("hidden");
+    ActionResult.parentElement.classList.remove("d-none");
     if (roll) {
       ActionResult.innerText = "rolled a " + roll;
     } else if (!roll) {

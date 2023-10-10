@@ -11,20 +11,23 @@
     <form>
       <div class="form-group">
         <label for="player-number">How many players?</label>
-        <input type="number" class="form-control col-4" id="player-number" name="player-number">
+        <input type="number" class="form-control col-4" id="player-number" name="player-number" min="1">
       </div>
       <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
 
-    <div id="game" class="card bg-light" hidden>
+    <div id="game" class="card d-none list-group-item-secondary">
       <h2 class="card-header">It is player <span class="active-player">1</span>'s turn</h2>
-      <div class="card-body"> 
+      <div class="card-body">
         <p>Their turn total is <span class="active-total">0</span></p>
         <p class="score-record">The scores are:</p>
-        <button type="button" class="btn btn-secondary" value="roll-button">Roll Dice</button>
-        <button type="button" class="btn btn-secondary" value="hold-button">Hold</button>
-        <p class="mt-3" hidden>Player <span class="clicking-player">1</span> <span class="action-result">_</span></p>
+        <div class="game-buttons">
+          <button type="button" class="btn btn-secondary" value="roll-button">Roll Dice</button>
+          <button type="button" class="btn btn-secondary" value="hold-button">Hold</button>
+        </div>
+        <button type="button" class="btn btn-danger d-none" value="reset-button">Restart</button>
       </div>
+      <p class="font-weight-bold mb-0 card-footer">Player <span class="clicking-player">1</span> <span class="action-result">_</span></p>
     </div>
   </div>
 </body>
