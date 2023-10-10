@@ -99,3 +99,15 @@ pigDice.endTurn();
 pigDice.endTurn();
 console.log(pigDice.activePlayer);
 Expected Output: 0
+
+Describe: reset()
+
+Test: "It should return a new pigDice object"
+Code:
+pigDice.reset()
+Expected Output: PigDice {playerNum: undefined, ...}
+
+Test: "It should return a new pigDice object with the same player number"
+Code:
+pigDice.reset()
+Expected Output: PigDice {playerNum: 2, ...}

@@ -44,16 +44,18 @@ let pigDice;
 function handleGameInit(event) {
   event.preventDefault();
   const input = document.querySelector("#player-number");
-  pigDice = new PigDice(parseInt(input.value));
+  if (event.type === "submit") {
+    pigDice = new PigDice(parseInt(input.value));
+  }
   generateScores();
-  document.querySelector("form").toggleAttribute("hidden");
-  document.querySelector("#game").toggleAttribute("hidden");
+  document.querySelector("form").classList.add("d-none");
+  document.querySelector("#game").classList.remove("d-none");
 }
 
 function generateScores() {
   let scoreList = document.createElement("ul");
   const styleArray = ["secondary", "warning", "success", "primary", "danger", "info"];
-  scoreList.classList.add("list-group", "mb-3");
+  scoreList.classList.add("score-list", "list-group", "mb-3");
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
     li.classList.add("list-group-item", "border-0",`list-group-item-${styleArray[i % 5]}`)
@@ -91,6 +93,13 @@ function handleChoice(event) {
   }
   if (pigDice.winner !== null) {
     ActionResult.innerText = "won the game!";
+    document.querySelector(".game-buttons").classList.toggle("d-none");
+    document.querySelector("[value=reset-button]").classList.toggle("d-none");
+    if (event.target.value === "reset-button") {
+      pigDice = pigDice.reset();
+      document.querySelector(".score-list").remove();
+      handleGameInit(event);
+    }
   }
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
