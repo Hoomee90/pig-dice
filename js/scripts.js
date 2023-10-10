@@ -6,6 +6,7 @@ class PigDice {
     this.previousPlayer;
     this.scores = {};
     this.turnScore = 0;
+    this.winner = null;
   }
   roll() {
     let currentRoll = Math.floor(Math.random() * 6 + 1);
@@ -19,12 +20,19 @@ class PigDice {
   hold() {
     let playerScore = this.scores[this.activePlayer];
     this.scores[this.activePlayer] = playerScore ? playerScore + this.turnScore : this.turnScore;
-    this.endTurn();
+    if (playerScore >= 100) {
+      this.winner = this.activePlayer;
+    } else {
+      this.endTurn();
+    }
   }
   endTurn() {
     this.turnScore = 0;
     this.previousPlayer = this.activePlayer;
     this.activePlayer = this.activePlayer + 1 === this.playerNum ? 0 : this.activePlayer + 1;
+  }
+  reset() {
+    return new PigDice(this.playerNum);
   }
 }
 
@@ -43,11 +51,11 @@ function handleGameInit(event) {
 
 function generateScores() {
   let scoreList = document.createElement("ul");
-  const styleArray = ["secondary", "danger", "warning", "success", "primary", "info"];
+  const styleArray = ["secondary", "warning", "success", "primary", "danger", "info"];
   scoreList.classList.add("list-group", "mb-3");
   for (let i = 0; i < pigDice.playerNum; i++) {
     let li = document.createElement("li");
-    li.classList.add("list-group-item", `list-group-item-${styleArray[i % 6]}`)
+    li.classList.add("list-group-item", "border-0",`list-group-item-${styleArray[i % 5]}`)
     let span = document.createElement("span");
     span.id = `score-${i}`;
     li.innerText = `Player ${i + 1}'s score is `;
@@ -82,7 +90,7 @@ function handleChoice(event) {
   }
   document.querySelector(".active-player").innerText = pigDice.activePlayer + 1;
   document.querySelector(".active-total").innerText = pigDice.turnScore;
-  document.querySelector("#game").className = `card ${document.querySelector(`span#score-${pigDice.activePlayer}`).parentElement.classList[1]}`
+  document.querySelector("#game").className = `card ${document.querySelector(`span#score-${pigDice.activePlayer}`).parentElement.classList[2]}`
 }
 
 window.addEventListener("load", () => {
